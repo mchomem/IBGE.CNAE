@@ -1,4 +1,6 @@
-﻿namespace IBGE.CNAE.Api.Services;
+﻿using IBGE.CNAE.Api.Exceptions;
+
+namespace IBGE.CNAE.Api.Services;
 
 public class CnaeService : ICnaeService
 {
@@ -51,13 +53,13 @@ public class CnaeService : ICnaeService
         string directory = Path.Combine(AppContext.BaseDirectory, "Data");
 
         if (!Directory.Exists(directory))
-            throw new ApplicationException("Directory not found.");
+            throw new CnaeException("Directory not found.");
 
         // Busca o primeiro arquivo .xlsx no diretório
         var filePath = Directory.GetFiles(directory, "*.xlsx").FirstOrDefault();
 
         if (filePath == null)
-            throw new ApplicationException("Excel file not found.");
+            throw new CnaeException("Excel file not found.");
 
         return filePath;
     }
