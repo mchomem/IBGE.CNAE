@@ -24,7 +24,7 @@ public class Cnae
         Subclasse = Regex.Replace(Subclasse, @"[^\d]", string.Empty);
     }
 
-    public void GetAnotherFieldsBySubclasse()
+    public void FillAnotherFieldsBySubclasse()
     {
         Divisao = Subclasse.Substring(0, 2);
         Grupo = Subclasse.Substring(0, 3);

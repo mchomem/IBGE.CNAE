@@ -36,7 +36,7 @@ public class CnaeService : ICnaeService
 
                 var cnae = new Cnae(secao, divisao, grupo, classe, subclasse, descricao);
 
-                cnae.GetAnotherFieldsBySubclasse();
+                cnae.FillAnotherFieldsBySubclasse();
                 cnae.RemoveMaskToSubclasseField();
 
                 cnaes.Add(cnae);
