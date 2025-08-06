@@ -4,4 +4,4 @@ Example of using minimal api to extract CNAE data from an excel file available a
 
 As shown in the image below, the cells in red represent the content that is read to create the list. The Excel file must hold exactly the same
 
-[excel-read-cells](/Docs/Images/excel-read-cells.png)
+![excel-read-cells](/Docs/Images/excel-read-cells.png)
