@@ -1,6 +1,6 @@
 @IBGE.CNAE.Api_HostAddress = http://localhost:5093
 
-GET {{IBGE.CNAE.Api_HostAddress}}/weatherforecast/
+GET {{IBGE.CNAE.Api_HostAddress}}/api/cnae
 Accept: application/json
 
 ###
