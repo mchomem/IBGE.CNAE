@@ -19,7 +19,7 @@ app.UseHttpsRedirection();
 
 app.MapGet("/api/cnae", async (ICnaeService cnaeService) =>
 {
-    var list = await cnaeService.ExcelReader();
+    var list = await cnaeService.GetAllAsync();
 
     return Results.Ok(list);
 })

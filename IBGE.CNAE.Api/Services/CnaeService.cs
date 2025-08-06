@@ -2,7 +2,7 @@
 
 public class CnaeService : ICnaeService
 {
-    public async Task<IEnumerable<Cnae>> ExcelReader()
+    public async Task<IEnumerable<Cnae>> GetAllAsync()
     {
         var cnaes = new List<Cnae>();
 

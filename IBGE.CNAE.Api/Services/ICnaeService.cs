@@ -2,6 +2,6 @@
 
 public interface ICnaeService
 {
-    Task<IEnumerable<Cnae>> ExcelReader();
+    Task<IEnumerable<Cnae>> GetAllAsync();
     string GetFilePath();
 }
