@@ -1,6 +1,4 @@
-﻿using IBGE.CNAE.Api.Exceptions;
-
-namespace IBGE.CNAE.Api.Services;
+﻿namespace IBGE.CNAE.Api.Services;
 
 public class CnaeService : ICnaeService
 {
