@@ -2,12 +2,14 @@
 
 public class CnaeService : ICnaeService
 {
-    public async Task<IEnumerable<Cnae>> ExcelReader(string filePath)
+    public async Task<IEnumerable<Cnae>> ExcelReader()
     {
         var cnaes = new List<Cnae>();
 
         await Task.Run(() =>
         {
+            var filePath = GetFilePath();
+
             using var workBook = new XLWorkbook(filePath);
             var workSheet = workBook.Worksheet(1); // primeira aba
             var rangeUsed = workSheet.RangeUsed();
@@ -42,5 +44,21 @@ public class CnaeService : ICnaeService
         });
 
         return cnaes;
+    }
+
+    public string GetFilePath()
+    {
+        string directory = Path.Combine(AppContext.BaseDirectory, "Data");
+
+        if (!Directory.Exists(directory))
+            throw new ApplicationException("Directory not found.");
+
+        // Busca o primeiro arquivo .xlsx no diretório
+        var filePath = Directory.GetFiles(directory, "*.xlsx").FirstOrDefault();
+
+        if (filePath == null)
+            throw new ApplicationException("Excel file not found.");
+
+        return filePath;
     }
 }

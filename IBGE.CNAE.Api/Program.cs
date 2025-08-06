@@ -17,20 +17,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/api/cnaes", async (ICnaeService cnaeService) =>
+app.MapGet("/api/cnae", async (ICnaeService cnaeService) =>
 {
-    string directory = Path.Combine(AppContext.BaseDirectory, "Data");
-
-    if (!Directory.Exists(directory))
-        return Results.NotFound("Directory not found.");
-
-    // Busca o primeiro arquivo .xlsx no diretório
-    var filePath = Directory.GetFiles(directory, "*.xlsx").FirstOrDefault();
-
-    if (filePath == null)
-        return Results.NotFound("Excel file not found.");
-
-    var list = await cnaeService.ExcelReader(filePath);
+    var list = await cnaeService.ExcelReader();
 
     return Results.Ok(list);
 })
