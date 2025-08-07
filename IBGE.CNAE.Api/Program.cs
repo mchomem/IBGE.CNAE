@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Mvc;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -17,9 +19,9 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
-app.MapGet("/api/cnae", async (ICnaeService cnaeService) =>
+app.MapGet("/api/cnae", async ([FromServices] ICnaeService cnaeService, [FromQuery] int pageNumber = 1, [FromQuery] int size = 10) =>
 {
-    var list = await cnaeService.GetAllAsync();
+    var list = await cnaeService.GetAllAsync(pageNumber, size);
 
     return Results.Ok(list);
 })

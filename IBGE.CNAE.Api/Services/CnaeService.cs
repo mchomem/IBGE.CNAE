@@ -2,7 +2,7 @@
 
 public class CnaeService : ICnaeService
 {
-    public async Task<IEnumerable<Cnae>> GetAllAsync()
+    public async Task<IEnumerable<Cnae>> GetAllAsync(int? pageNumber, int? size)
     {
         var cnaes = new List<Cnae>();
 
@@ -13,12 +13,11 @@ public class CnaeService : ICnaeService
             using var workBook = new XLWorkbook(filePath);
             var workSheet = workBook.Worksheet(1); // primeira aba
             var rangeUsed = workSheet.RangeUsed();
-            
+
             if (rangeUsed == null)
                 return;
 
             var rows = rangeUsed.RowsUsed(); // ignora linhas vazias
-
             var secao = string.Empty;
 
             foreach (var row in rows.Skip(3)) // ignora linhas de cabeçalho
@@ -42,6 +41,15 @@ public class CnaeService : ICnaeService
                 cnaes.Add(cnae);
             }
         });
+
+        if (cnaes is null || !cnaes.Any())
+            return Enumerable.Empty<Cnae>();
+
+        if (pageNumber is not null && size is not null)
+        {
+            var skip = (pageNumber.Value - 1) * size.Value;
+            cnaes = cnaes.Skip(skip).Take(size.Value).ToList();
+        }
 
         return cnaes;
     }
